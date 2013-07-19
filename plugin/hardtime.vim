@@ -1,5 +1,6 @@
 " hartime.vim 
 " Author: Tom Cammann <cammann.tom@gmail.com>
+" Site: https://github.com/takac/vim-hardtime
 " Version: 0.4
 
 if exists("g:HardTime_loaded")
@@ -18,7 +19,7 @@ endif
 
 " Timeout in seconds between keystrokes
 if !exists("g:hardtime_timeout")
-	let g:hardtime_timeout = 0.05
+	let g:hardtime_timeout = 1
 endif
 
 if !exists("g:hardtime_showmsg")
@@ -54,6 +55,9 @@ fun! HardTimeOn()
 endf
 
 fun! HardTimeToggle()
+	if !exists("s:hardtime_on")
+		let s:hardtime_on = 0
+	endif
 	if s:hardtime_on
 		call HardTimeOff()
 	else
@@ -86,4 +90,3 @@ endf
 command! HardTimeOn call HardTimeOn()
 command! HardTimeOff call HardTimeOff()
 command! HardTimeToggle call HardTimeToggle()
-
