@@ -40,6 +40,9 @@ fun! HardTimeOff()
     for i in g:list_of_normal_keys
         exec "silent! nunmap <buffer> " . i
     endfor
+    for i in g:list_of_visual_keys
+        exec "silent! vunmap <buffer> " . i
+    endfor
     if g:hardtime_showmsg
         echo "Hard time off"
     endif
