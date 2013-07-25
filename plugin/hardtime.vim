@@ -6,6 +6,7 @@
 if exists("g:HardTime_loaded")
     finish
 endif
+let g:HardTime_loaded = 1
 
 " List of keys to block
 if !exists("g:list_of_visual_keys")
