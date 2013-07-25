@@ -29,14 +29,25 @@ endif
 " Start hardtime in every buffer
 if exists("g:hardtime_default_on")
     if g:hardtime_default_on
-        autocmd! BufEnter * HardTimeOn
+        autocmd! BufEnter * call s:HardTime()
     endif
 endif
 
 let s:lasttime = 0
 
+fun! s:HardTime()
+    if !exists("b:hardtime_on")
+      let b:hardtime_on = g:hardtime_default_on
+    endif
+    if b:hardtime_on
+      call HardTimeOn()
+    else
+      call HardTimeOff()
+    endif
+endf
+
 fun! HardTimeOff()
-    let s:hardtime_on = 0
+    let b:hardtime_on = 0
     for i in g:list_of_normal_keys
         exec "silent! nunmap <buffer> " . i
     endfor
@@ -49,7 +60,7 @@ fun! HardTimeOff()
 endf
 
 fun! HardTimeOn()
-    let s:hardtime_on = 1
+    let b:hardtime_on = 1
     for i in g:list_of_normal_keys
         exec "nnoremap <buffer> <silent> <expr> " . i . " TryKey() ? \"" . i . "\" : TooSoon()"
     endfor
@@ -62,10 +73,10 @@ fun! HardTimeOn()
 endf
 
 fun! HardTimeToggle()
-    if !exists("s:hardtime_on")
-        let s:hardtime_on = 0
+    if !exists("b:hardtime_on")
+        let b:hardtime_on = 0
     endif
-    if s:hardtime_on
+    if b:hardtime_on
         call HardTimeOff()
     else
         call HardTimeOn()
