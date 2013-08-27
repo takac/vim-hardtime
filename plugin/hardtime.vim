@@ -1,4 +1,4 @@
-" hartime.vim
+" hardtime.vim
 " Author: Tom Cammann <cammann.tom@gmail.com>
 " Site: https://github.com/takac/vim-hardtime
 " Version: 0.4
