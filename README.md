@@ -31,7 +31,7 @@ You can also set the list of keys you want to use with hardtime with the
 `g:list_of_normal_keys` and `g:list_of_visual_keys` variables. These are both
 initially set to `h`, `j`, `k`, `l`, `-`, `+`,`<UP>`, `<DOWN>`, `<LEFT>`, `<RIGHT>`.
 
-You can also tweak the timeout using `g:HardTime_loaded`, however is not much
+You can also tweak the timeout using `g:hardtime_timeout`, however is not much
 granularity using the current method of timing.
 
 Also you can suppress notification about HardTime enabled with `let g:hardtime_showmsg = 0`.
