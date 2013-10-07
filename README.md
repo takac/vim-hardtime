@@ -7,7 +7,7 @@ experience.
 It works using a timeout on the keys you want to stop repeating, i.e. `h`, `j`, `k`, `l`, `UP`, `DOWN`, `LEFT`, `RIGHT`.
 This timeout is set to 1 second. After 1 second you can use a movement key again.
 
-Stop repeating jjjjj...
+Stop repeating jjjjj...  
 Stop repeating kkkk...
 
 Kick the habit now!
@@ -17,6 +17,13 @@ hardmode fell short was that sometimes `h,j,k,l` are needed! Hardtime lets you u
 these keys but only once every second. You can still create macros in hardtime
 where you need to move down lines, and you can still move that one character
 over to make that edit.
+
+### Resource to help you kick the bad habits
+
+- Drew Neil has a great blog post on [Habit breaking, habit making](http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/)
+- Pratising some [Vim golf](http://vimgolf.com/) will certainly improve you movement skills
+- Vim help, `:h word-motions` and `:h motion` are both great resources
+- A good [Vim wiki](http://vim.wikia.com/wiki/Moving_around) article 
 
 ### Usage
 
