@@ -1,7 +1,7 @@
 # Hardtime
 
 Hardtime helps you break that annoying habit vimmers have of scrolling up and
-down the page using `jjjjj` and `kkkkk` but without comprimising the rest of our vim
+down the page using `jjjjj` and `kkkkk` but without compromising the rest of our vim
 experience.
 
 It works using a timeout on the keys you want to stop repeating, i.e. `h`, `j`, `k`, `l`, `UP`, `DOWN`, `LEFT`, `RIGHT`.
@@ -18,16 +18,16 @@ these keys but only once every second. You can still create macros in hardtime
 where you need to move down lines, and you can still move that one character
 over to make that edit.
 
-### Resource to help you kick the bad habits
+### Resources to help you kick the bad habits
 
 - Drew Neil has a great blog post on [Habit breaking, habit making](http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/)
-- Pratising some [Vim golf](http://vimgolf.com/) will certainly improve you movement skills
+- Practising some [Vim golf](http://vimgolf.com/) will certainly improve your movement skills
 - Vim help, `:h word-motions` and `:h motion` are both great resources
 - A good [Vim wiki](http://vim.wikia.com/wiki/Moving_around) article 
 
 ### Usage
 
-Once installed you can all the command `:HardTimeOn` to active hardtime,
+Once installed you can call the command `:HardTimeOn` to activate hardtime,
 conversely you can use `:HardTimeOff` to swtich it off. You can also use
 `:HardTimeToggle` toggle it on an off.
 
