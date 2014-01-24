@@ -5,7 +5,7 @@ down the page using `jjjjj` and `kkkkk` but without compromising the rest of our
 experience.
 
 It works using a timeout on the keys you want to stop repeating, i.e. `h`, `j`, `k`, `l`, `UP`, `DOWN`, `LEFT`, `RIGHT`.
-This timeout is set to 1 second. After 1 second you can use a movement key again.
+This timeout is set to 1000 milliseconds. After this time you can use a movement key again.
 
 Stop repeating jjjjj...
 Stop repeating kkkk...
@@ -38,8 +38,8 @@ You can also set the list of keys you want to use with hardtime with the
 `g:list_of_normal_keys` and `g:list_of_visual_keys` variables. These are both
 initially set to `h`, `j`, `k`, `l`, `-`, `+`,`<UP>`, `<DOWN>`, `<LEFT>`, `<RIGHT>`.
 
-You can also tweak the timeout using `g:hardtime_timeout`, however there is not a lot
-of granularity using the current method of timing.
+You can also tweak the timeout using `g:hardtime_timeout`, specifying the time in
+milliseconds.
 
 You can also suppress notification about HardTime enabled with `let g:hardtime_showmsg = 0`.
 
