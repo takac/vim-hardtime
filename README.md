@@ -7,7 +7,7 @@ experience.
 It works using a timeout on the keys you want to stop repeating, i.e. `h`, `j`, `k`, `l`, `UP`, `DOWN`, `LEFT`, `RIGHT`.
 This timeout is set to 1 second. After 1 second you can use a movement key again.
 
-Stop repeating jjjjj...  
+Stop repeating jjjjj...
 Stop repeating kkkk...
 
 Kick the habit now!
@@ -23,7 +23,7 @@ over to make that edit.
 - Drew Neil has a great blog post on [Habit breaking, habit making](http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/)
 - Practising some [Vim golf](http://vimgolf.com/) will certainly improve your movement skills
 - Vim help, `:h word-motions` and `:h motion` are both great resources
-- A good [Vim wiki](http://vim.wikia.com/wiki/Moving_around) article 
+- A good [Vim wiki](http://vim.wikia.com/wiki/Moving_around) article
 
 ### Usage
 
@@ -38,10 +38,10 @@ You can also set the list of keys you want to use with hardtime with the
 `g:list_of_normal_keys` and `g:list_of_visual_keys` variables. These are both
 initially set to `h`, `j`, `k`, `l`, `-`, `+`,`<UP>`, `<DOWN>`, `<LEFT>`, `<RIGHT>`.
 
-You can also tweak the timeout using `g:hardtime_timeout`, however is not much
-granularity using the current method of timing.
+You can also tweak the timeout using `g:hardtime_timeout`, however there is not a lot
+of granularity using the current method of timing.
 
-Also you can suppress notification about HardTime enabled with `let g:hardtime_showmsg = 0`.
+You can also suppress notification about HardTime enabled with `let g:hardtime_showmsg = 0`.
 
 ### Installation
 I recommend installing using [Vundle](https://github.com/gmarik/vundle):
