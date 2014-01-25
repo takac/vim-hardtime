@@ -20,7 +20,7 @@ endif
 
 " Timeout in seconds between keystrokes
 if !exists("g:hardtime_timeout")
-    let g:hardtime_timeout = 1
+    let g:hardtime_timeout = 1000
 endif
 
 if !exists("g:hardtime_showmsg")
@@ -87,7 +87,7 @@ endf
 
 fun! TryKey()
     let now = GetNow()
-    if now > s:lasttime + g:hardtime_timeout
+    if now > s:lasttime + g:hardtime_timeout/1000
         let s:lasttime = now
         return 1
     else
