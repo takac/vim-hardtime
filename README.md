@@ -34,14 +34,25 @@ conversely you can use `:HardTimeOff` to swtich it off. You can also use
 If you want hardtime to run in every buffer you can set `let
 g:hardtime_default_on = 1` in your `.vimrc`.
 
-You can also set the list of keys you want to use with hardtime with the
-`g:list_of_normal_keys` and `g:list_of_visual_keys` variables. These are both
-initially set to `h`, `j`, `k`, `l`, `-`, `+`,`<UP>`, `<DOWN>`, `<LEFT>`, `<RIGHT>`.
+### Customisation
 
-You can also tweak the timeout using `g:hardtime_timeout`, specifying the time in
+##### Keys
+Set the list of keys to use with hardtime using `g:list_of_normal_keys` and
+`g:list_of_visual_keys` variables. These are both initially set to `h`, `j`,
+`k`, `l`, `-`, `+`,`<UP>`, `<DOWN>`, `<LEFT>`, `<RIGHT>`.
+
+##### Timeout
+It is possible to tweak the timeout using `g:hardtime_timeout`, specifying the time in
 milliseconds.
 
-You can also suppress notification about HardTime enabled with `let g:hardtime_showmsg = 0`.
+##### Supress Notifications
+To suppress the notification about HardTime being enabled set `let g:hardtime_showmsg = 0`.
+
+##### Ignore Buffers
+To enable hardtime to ignore certain buffer patterns set
+
+    let g:hardtime_ignore_buffer_patterns = [ "CustomPatt[ae]rn", "NERD.*" ]
+
 
 ### Installation
 I recommend installing using [Vundle](https://github.com/gmarik/vundle):

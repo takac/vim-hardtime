@@ -18,6 +18,11 @@ if !exists("g:list_of_normal_keys")
                      \ "+","<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
 endif
 
+" Allow to ignore certain buffer patterns.
+if !exists("g:hardtime_ignore_buffer_patterns")
+    let g:hardtime_ignore_buffer_patterns = []
+endif
+
 " Timeout in seconds between keystrokes
 if !exists("g:hardtime_timeout")
     let g:hardtime_timeout = 1000
@@ -87,13 +92,25 @@ endf
 
 fun! TryKey()
     let now = GetNow()
-    if now > s:lasttime + g:hardtime_timeout/1000
+    let ignoreBuffer = s:IsIgnoreBuffer()
+    if now > s:lasttime + g:hardtime_timeout/1000 || ignoreBuffer
         let s:lasttime = now
         return 1
     else
         return 0
     endif
 endf
+
+fun! s:IsIgnoreBuffer()
+    let name = bufname("%")
+    for i in g:hardtime_ignore_buffer_patterns
+        if name =~ i
+            return 1
+        endif
+    endfor
+    return 0
+endf
+
 
 fun! TooSoon()
     if g:hardtime_showmsg
