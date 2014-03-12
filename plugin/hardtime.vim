@@ -42,13 +42,10 @@ endif
 let s:lasttime = 0
 
 fun! s:HardTime()
-    if !exists("b:hardtime_on")
-      let b:hardtime_on = g:hardtime_default_on
-    endif
-    if b:hardtime_on
+    let b:hardtime_on = 1
+    let ignoreBuffer = s:IsIgnoreBuffer()
+    if !ignoreBuffer
       call HardTimeOn()
-    else
-      call HardTimeOff()
     endif
 endf
 
@@ -92,8 +89,7 @@ endf
 
 fun! TryKey()
     let now = GetNow()
-    let ignoreBuffer = s:IsIgnoreBuffer()
-    if now > s:lasttime + g:hardtime_timeout/1000 || ignoreBuffer
+    if now > s:lasttime + g:hardtime_timeout/1000
         let s:lasttime = now
         return 1
     else
