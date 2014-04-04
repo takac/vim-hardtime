@@ -40,6 +40,7 @@ if exists("g:hardtime_default_on")
 endif
 
 let s:lasttime = 0
+let s:lastkey = ''
 
 fun! s:HardTime()
     let b:hardtime_on = 1
@@ -65,10 +66,10 @@ endf
 fun! HardTimeOn()
     let b:hardtime_on = 1
     for i in g:list_of_normal_keys
-        exec "nnoremap <buffer> <silent> <expr> " . i . " TryKey() ? \"" . i . "\" : TooSoon()"
+        exec "nnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? \"" . i . "\" : TooSoon()"
     endfor
     for i in g:list_of_visual_keys
-        exec "vnoremap <buffer> <silent> <expr> " . i . " TryKey() ? \"" . i . "\" : TooSoon()"
+        exec "vnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? \"" . i . "\" : TooSoon()"
     endfor
     if g:hardtime_showmsg
         echo "Hard time on"
@@ -87,10 +88,12 @@ fun! HardTimeToggle()
 endf
 
 
-fun! TryKey()
+fun! TryKey(key)
     let now = GetNow()
-    if now > s:lasttime + g:hardtime_timeout/1000
+    if a:key != s:lastkey || now > s:lasttime + g:hardtime_timeout/1000
         let s:lasttime = now
+        let s:lastkey = a:key
+        echo s:lastkey
         return 1
     else
         return 0
