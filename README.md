@@ -53,6 +53,10 @@ To enable hardtime to ignore certain buffer patterns set
 
     let g:hardtime_ignore_buffer_patterns = [ "CustomPatt[ae]rn", "NERD.*" ]
 
+##### Allow different keys
+To make hardtime allow a key if it is different from the previous key, set
+`let g:hardtime_allow_different_key = 1`.
+This, for example, makes it possible to input "jh", but not "jj".
 
 ### Installation
 I recommend installing using [Vundle](https://github.com/gmarik/vundle):
