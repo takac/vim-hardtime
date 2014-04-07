@@ -32,6 +32,10 @@ if !exists("g:hardtime_showmsg")
     let g:hardtime_showmsg = 0
 endif
 
+if !exists("g:hardtime_allow_different_key")
+    let g:hardtime_allow_different_key = 0
+endif
+
 " Start hardtime in every buffer
 if exists("g:hardtime_default_on")
     if g:hardtime_default_on
@@ -66,10 +70,10 @@ endf
 fun! HardTimeOn()
     let b:hardtime_on = 1
     for i in g:list_of_normal_keys
-        exec "nnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? \"" . i . "\" : TooSoon()"
+        exec "nnoremap <buffer> <silent> <expr> " . i . " TryKey(\"" . i . "\") ? \"" . i . "\" : TooSoon()"
     endfor
     for i in g:list_of_visual_keys
-        exec "vnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? \"" . i . "\" : TooSoon()"
+        exec "vnoremap <buffer> <silent> <expr> " . i . " TryKey(\"" . i . "\") ? \"" . i . "\" : TooSoon()"
     endfor
     if g:hardtime_showmsg
         echo "Hard time on"
@@ -90,10 +94,9 @@ endf
 
 fun! TryKey(key)
     let now = GetNow()
-    if a:key != s:lastkey || now > s:lasttime + g:hardtime_timeout/1000
+    if (now > s:lasttime + g:hardtime_timeout/1000) || (g:hardtime_allow_different_key && a:key != s:lastkey)
         let s:lasttime = now
         let s:lastkey = a:key
-        echo s:lastkey
         return 1
     else
         return 0
