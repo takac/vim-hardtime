@@ -35,28 +35,57 @@ If you want hardtime to run in every buffer you can set `let
 g:hardtime_default_on = 1` in your `.vimrc`.
 
 ### Customisation
-
+Add the following variables to your `.vimrc` to enable customisations.
 ##### Keys
-Set the list of keys to use with hardtime using `g:list_of_normal_keys` and
-`g:list_of_visual_keys` variables. These are both initially set to `h`, `j`,
-`k`, `l`, `-`, `+`,`<UP>`, `<DOWN>`, `<LEFT>`, `<RIGHT>`.
+Set the list of keys to use with hardtime 
+
+    g:list_of_normal_keys = [ "w", "W", "b", "B" ]
+    g:list_of_visual_keys = [ "o", "n", "w", "b" ]
+
+These default to `[ "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" ]`.
 
 ##### Timeout
-It is possible to tweak the timeout using `g:hardtime_timeout`, specifying the time in
-milliseconds.
+It is possible to tweak the timeout allowed between keypresses. specifying 
+the time in milliseconds.
 
-##### Supress Notifications
-To suppress the notification about HardTime being enabled set `let g:hardtime_showmsg = 0`.
+    g:hardtime_timeout = 2000
+    
+This allows you increase the amount of time 
+
+The default is `1000`.
+
+##### Enable Notifications
+To enable the notification about HardTime being enabled set 
+
+    let g:hardtime_showmsg = 1
+    
+The default is `0`.
 
 ##### Ignore Buffers
 To enable hardtime to ignore certain buffer patterns set
 
     let g:hardtime_ignore_buffer_patterns = [ "CustomPatt[ae]rn", "NERD.*" ]
-
+    
+The default is `[]`.
 ##### Allow different keys
 To make hardtime allow a key if it is different from the previous key, set
-`let g:hardtime_allow_different_key = 1`.
+
+    let g:hardtime_allow_different_key = 1
+
 This, for example, makes it possible to input "jh", but not "jj".
+
+The default is `0`.
+
+##### Maximum number of repetative key preses
+This setting will let you press a key `n` number of times before
+hardtime starts ignoring subsequent keypresses.
+
+    let g:hardtime_maxcount = 2
+
+Setting this value to `2` will allow a user to press `jj` but not `jjj`.
+
+The default is `1`.
+
 
 ### Installation
 I recommend installing using [Vundle](https://github.com/gmarik/vundle):
