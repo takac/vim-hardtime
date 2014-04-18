@@ -36,6 +36,10 @@ if !exists("g:hardtime_allow_different_key")
     let g:hardtime_allow_different_key = 0
 endif
 
+if !exists("g:hardtime_maxcount")
+    let g:hardtime_maxcount = 1
+endif
+
 " Start hardtime in every buffer
 if exists("g:hardtime_default_on")
     if g:hardtime_default_on
@@ -45,6 +49,7 @@ endif
 
 let s:lasttime = 0
 let s:lastkey = ''
+let s:lastcount = 0
 
 fun! s:HardTime()
     let b:hardtime_on = 1
@@ -94,7 +99,13 @@ endf
 
 fun! TryKey(key)
     let now = GetNow()
-    if (now > s:lasttime + g:hardtime_timeout/1000) || (g:hardtime_allow_different_key && a:key != s:lastkey)
+    if (now > s:lasttime + g:hardtime_timeout/1000) || (g:hardtime_allow_different_key && a:key != s:lastkey) ||
+    \ (s:lastcount < g:hardtime_maxcount)
+        if (now > s:lasttime + g:hardtime_timeout/1000) || (g:hardtime_allow_different_key && a:key != s:lastkey)
+            let s:lastcount = 1
+        else
+            let s:lastcount += 1
+        endif
         let s:lasttime = now
         let s:lastkey = a:key
         return 1
