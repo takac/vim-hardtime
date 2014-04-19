@@ -75,10 +75,10 @@ endf
 fun! HardTimeOn()
     let b:hardtime_on = 1
     for i in g:list_of_normal_keys
-        exec "nnoremap <buffer> <silent> <expr> " . i . " TryKey(\"" . i . "\") ? \"" . i . "\" : TooSoon()"
+        exec "nnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? '" . (maparg(i, "n") != "" ? maparg(i, "n") : i) . "' : TooSoon()"
     endfor
     for i in g:list_of_visual_keys
-        exec "vnoremap <buffer> <silent> <expr> " . i . " TryKey(\"" . i . "\") ? \"" . i . "\" : TooSoon()"
+        exec "vnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? '" . (maparg(i, "n") != "" ? maparg(i, "n") : i) . "' : TooSoon()"
     endfor
     if g:hardtime_showmsg
         echo "Hard time on"
