@@ -43,7 +43,7 @@ endif
 " Start hardtime in every buffer
 if exists("g:hardtime_default_on")
     if g:hardtime_default_on
-        autocmd! BufEnter * call s:HardTime()
+        autocmd! BufRead,BufNewFile * call s:HardTime()
     endif
 endif
 
@@ -52,7 +52,7 @@ let s:lastkey = ''
 let s:lastcount = 0
 
 fun! s:HardTime()
-    let b:hardtime_on = 1
+    let b:hardtime_on = 0
     let ignoreBuffer = s:IsIgnoreBuffer()
     if !ignoreBuffer
       call HardTimeOn()
@@ -73,16 +73,22 @@ fun! HardTimeOff()
 endf
 
 fun! HardTimeOn()
-    let b:hardtime_on = 1
-    for i in g:list_of_normal_keys
-        exec "nnoremap <buffer> <silent> <expr> " . i . " TryKey(\"" . i . "\") ? \"" . i . "\" : TooSoon()"
-    endfor
-    for i in g:list_of_visual_keys
-        exec "vnoremap <buffer> <silent> <expr> " . i . " TryKey(\"" . i . "\") ? \"" . i . "\" : TooSoon()"
-    endfor
-    if g:hardtime_showmsg
-        echo "Hard time on"
-    end
+    if !exists("b:hardtime_on")
+        let b:hardtime_on = 0
+    endif
+    " Prevents from mapping keys recursively
+    if b:hardtime_on == 0
+        let b:hardtime_on = 1
+        for i in g:list_of_normal_keys
+            exec "nnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? '" . (maparg(i, "n") != "" ? maparg(i, "n") : i) . "' : TooSoon()"
+        endfor
+        for i in g:list_of_visual_keys
+            exec "vnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? '" . (maparg(i, "v") != "" ? maparg(i, "v") : i) . "' : TooSoon()"
+        endfor
+        if g:hardtime_showmsg
+            echo "Hard time on"
+        end
+    endif
 endf
 
 fun! HardTimeToggle()
