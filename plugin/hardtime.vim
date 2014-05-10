@@ -52,7 +52,6 @@ let s:lastkey = ''
 let s:lastcount = 0
 
 fun! s:HardTime()
-    let b:hardtime_on = 0
     let ignoreBuffer = s:IsIgnoreBuffer()
     if !ignoreBuffer
       call HardTimeOn()
