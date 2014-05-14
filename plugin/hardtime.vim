@@ -43,7 +43,7 @@ endif
 " Start hardtime in every buffer
 if exists("g:hardtime_default_on")
     if g:hardtime_default_on
-        autocmd! BufRead,BufNewFile * call s:HardTime()
+        autocmd BufRead,BufNewFile * call s:HardTime()
     endif
 endif
 
