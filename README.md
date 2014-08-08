@@ -37,7 +37,7 @@ g:hardtime_default_on = 1` in your `.vimrc`.
 ### Customisation
 Add the following variables to your `.vimrc` to enable customisations.
 ##### Keys
-Set the list of keys to use with hardtime 
+Set the list of keys to use with hardtime
 
     g:list_of_normal_keys = [ "w", "W", "b", "B" ]
     g:list_of_visual_keys = [ "o", "n", "w", "b" ]
@@ -45,28 +45,36 @@ Set the list of keys to use with hardtime
 These default to `[ "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" ]`.
 
 ##### Timeout
-It is possible to tweak the timeout allowed between keypresses. specifying 
+It is possible to tweak the timeout allowed between keypresses. specifying
 the time in milliseconds.
 
     g:hardtime_timeout = 2000
-    
-This allows you increase the amount of time 
+
+This allows you increase the amount of time
 
 The default is `1000`.
 
 ##### Enable Notifications
-To enable the notification about HardTime being enabled set 
+To enable the notification about HardTime being enabled set
 
     let g:hardtime_showmsg = 1
-    
+
 The default is `0`.
 
 ##### Ignore Buffers
 To enable hardtime to ignore certain buffer patterns set
 
     let g:hardtime_ignore_buffer_patterns = [ "CustomPatt[ae]rn", "NERD.*" ]
-    
+
 The default is `[]`.
+
+##### Ignore Quickfix
+The quickfix window cannot be added to the ignore buffers array to have hardtime ignore it set
+
+    let g:hardtime_ignore_quickfix = 1
+
+The default is `0`.
+
 ##### Allow different keys
 To make hardtime allow a key if it is different from the previous key, set
 
