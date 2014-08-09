@@ -23,6 +23,11 @@ if !exists("g:hardtime_ignore_buffer_patterns")
     let g:hardtime_ignore_buffer_patterns = []
 endif
 
+" Ignore quickfix buffer
+if !exists("g:hardtime_ignore_quickfix")
+    let g:hardtime_ignore_quickfix = 0
+endif
+
 " Timeout in seconds between keystrokes
 if !exists("g:hardtime_timeout")
     let g:hardtime_timeout = 1000
@@ -53,7 +58,8 @@ let s:lastcount = 0
 
 fun! s:HardTime()
     let ignoreBuffer = s:IsIgnoreBuffer()
-    if !ignoreBuffer
+    let ignoreQuickfix = s:IsIgnoreQuickfix()
+    if !ignoreBuffer && !ignoreQuickfix
       call HardTimeOn()
     endif
 endf
@@ -129,6 +135,12 @@ fun! s:IsIgnoreBuffer()
     return 0
 endf
 
+fun! s:IsIgnoreQuickfix()
+    if g:hardtime_ignore_quickfix && getbufvar(winbufnr("%"), '&buftype') == "quickfix"
+        return 1
+    endif
+    return 0
+endf
 
 fun! TooSoon()
     if g:hardtime_showmsg
