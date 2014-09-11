@@ -60,7 +60,8 @@ fun! s:HardTime()
     let ignoreBuffer = s:IsIgnoreBuffer()
     let ignoreQuickfix = s:IsIgnoreQuickfix()
     if !ignoreBuffer && !ignoreQuickfix
-      call HardTimeOn()
+      let is_new_buffer = 1
+      call HardTimeOn(is_new_buffer)
     endif
 endf
 
@@ -77,7 +78,8 @@ fun! HardTimeOff()
     endif
 endf
 
-fun! HardTimeOn()
+fun! HardTimeOn(...)
+    let l:is_new_buffer = a:0 > 0 ? a:1 : 0
     if !exists("b:hardtime_on")
         let b:hardtime_on = 0
     endif
@@ -90,7 +92,7 @@ fun! HardTimeOn()
         for i in g:list_of_visual_keys
             exec "xnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? '" . (maparg(i, "v") != "" ? maparg(i, "v") : i) . "' : TooSoon()"
         endfor
-        if g:hardtime_showmsg
+        if g:hardtime_showmsg && !l:is_new_buffer
             echo "Hard time on"
         end
     endif
