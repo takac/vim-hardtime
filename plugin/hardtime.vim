@@ -8,48 +8,26 @@ if exists("g:HardTime_loaded")
 endif
 let g:HardTime_loaded = 1
 
-" List of keys to block
-if !exists("g:list_of_visual_keys")
-    let g:list_of_visual_keys = [ "h", "j", "k", "l", "-",
-                     \ "+","<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-endif
-if !exists("g:list_of_normal_keys")
-    let g:list_of_normal_keys = [ "h", "j", "k", "l", "-",
-                     \ "+","<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-endif
+fun! s:check_defined(variable, default)
+	if !exists(a:variable)
+		let {a:variable} = a:default
+	endif
+endf
 
-" Allow to ignore certain buffer patterns.
-if !exists("g:hardtime_ignore_buffer_patterns")
-    let g:hardtime_ignore_buffer_patterns = []
-endif
+call s:check_defined("g:list_of_visual_keys", ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN", "<LEFT>", "<RIGHT>"])
+call s:check_defined("g:list_of_normal_keys", ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN", "<LEFT>", "<RIGHT>"])
 
-" Ignore quickfix buffer
-if !exists("g:hardtime_ignore_quickfix")
-    let g:hardtime_ignore_quickfix = 0
-endif
-
-" Timeout in seconds between keystrokes
-if !exists("g:hardtime_timeout")
-    let g:hardtime_timeout = 1000
-endif
-
-if !exists("g:hardtime_showmsg")
-    let g:hardtime_showmsg = 0
-endif
-
-if !exists("g:hardtime_allow_different_key")
-    let g:hardtime_allow_different_key = 0
-endif
-
-if !exists("g:hardtime_maxcount")
-    let g:hardtime_maxcount = 1
-endif
+call s:check_defined("g:hardtime", 1)
+call s:check_defined("g:hardtime_ignore_buffer_patterns", [])
+call s:check_defined("g:hardtime_ignore_quickfix", 0)
+call s:check_defined("g:hardtime_timeout", 1000)
+call s:check_defined("g:hardtime_showmsg", 1)
+call s:check_defined("g:hardtime_allow_different_key", 0)
+call s:check_defined("g:hardtime_maxcount", 1)
 
 " Start hardtime in every buffer
-if exists("g:hardtime_default_on")
-    if g:hardtime_default_on
-        autocmd BufRead,BufNewFile * call s:HardTime()
-    endif
+if g:hardtime
+	autocmd BufRead,BufNewFile * call s:HardTime()
 endif
 
 let s:lasttime = 0
@@ -64,23 +42,8 @@ fun! s:HardTime()
     endif
 endf
 
-fun! HardTimeOff()
-    let b:hardtime_on = 0
-    for i in g:list_of_normal_keys
-        exec "silent! nunmap <buffer> " . i
-    endfor
-    for i in g:list_of_visual_keys
-        exec "silent! vunmap <buffer> " . i
-    endfor
-    if g:hardtime_showmsg
-        echo "Hard time off"
-    endif
-endf
-
 fun! HardTimeOn()
-    if !exists("b:hardtime_on")
-        let b:hardtime_on = 0
-    endif
+	call s:check_defined("b:hardtime_on", 0)
     " Prevents from mapping keys recursively
     if b:hardtime_on == 0
         let b:hardtime_on = 1
@@ -90,20 +53,32 @@ fun! HardTimeOn()
         for i in g:list_of_visual_keys
             exec "xnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? '" . (maparg(i, "v") != "" ? maparg(i, "v") : i) . "' : TooSoon()"
         endfor
-        if g:hardtime_showmsg
-            echo "Hard time on"
-        end
     endif
 endf
 
+fun! HardTimeOff()
+    let b:hardtime_on = 0
+    for i in g:list_of_normal_keys
+        exec "silent! nunmap <buffer> " . i
+    endfor
+    for i in g:list_of_visual_keys
+        exec "silent! vunmap <buffer> " . i
+    endfor
+endf
+
+
 fun! HardTimeToggle()
-    if !exists("b:hardtime_on")
-        let b:hardtime_on = 0
-    endif
+	call s:check_defined("g:hardtime_on", 0)
     if b:hardtime_on
         call HardTimeOff()
+		if g:hardtime_showmsg
+			echo "Hard time off"
+		endif
     else
         call HardTimeOn()
+        if g:hardtime_showmsg
+            echo "Hard time on"
+        end
     endif
 endf
 
@@ -153,6 +128,5 @@ fun! GetNow()
     return reltimestr(reltime())
 endf
 
-command! HardTimeOn call HardTimeOn()
-command! HardTimeOff call HardTimeOff()
+
 command! HardTimeToggle call HardTimeToggle()
