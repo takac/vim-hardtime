@@ -27,22 +27,21 @@ over to make that edit.
 
 ### Usage
 
-Once installed you can call the command `:HardTimeOn` to activate hardtime,
-conversely you can use `:HardTimeOff` to swtich it off. You can also use
-`:HardTimeToggle` toggle it on an off.
+Once installed you can call the command :HardTimeToggle to toggle it on and off.
 
-If you want hardtime to run in every buffer you can set `let
-g:hardtime_default_on = 1` in your `.vimrc`.
+If you don't want hardtime to run in every buffer you can set `let
+g:hardtime = 0` in your `.vimrc`.
 
-### Customisation
-Add the following variables to your `.vimrc` to enable customisations.
+### Customization
+Add the following variables to your `.vimrc` to enable customizations.
 ##### Keys
-Set the list of keys to use with hardtime
+Set the list of keys to be banned of use with hardtime
 
-    g:list_of_normal_keys = [ "w", "W", "b", "B" ]
-    g:list_of_visual_keys = [ "o", "n", "w", "b" ]
+Defaults
 
-These default to `[ "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" ]`.
+	g:list_of_normal_keys = ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+	g:list_of_visual_keys = ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+	g:list_of_insert_keys = ["<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
 
 ##### Timeout
 It is possible to tweak the timeout allowed between keypresses. specifying
@@ -59,7 +58,7 @@ To enable the notification about HardTime being enabled set
 
     let g:hardtime_showmsg = 1
 
-The default is `0`.
+The default is `1`.
 
 ##### Ignore Buffers
 To enable hardtime to ignore certain buffer patterns set
