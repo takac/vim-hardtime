@@ -27,17 +27,19 @@ over to make that edit.
 
 ### Usage
 
-Once installed you can call the command :HardTimeToggle to toggle it on and off.
+Once installed you can call the command `:HardTimeOn` to activate hardtime,
+conversely you can use `:HardTimeOff` to swtich it off. You can also use
+`:HardTimeToggle` toggle it on an off.
 
-If you don't want hardtime to run in every buffer you can set `let
-g:hardtime = 0` in your `.vimrc`.
+If you want hardtime to run in every buffer you can set `let
+g:hardtime_default_on = 1` in your `.vimrc`.
 
 ### Customization
 Add the following variables to your `.vimrc` to enable customizations.
 ##### Keys
 Set the list of keys to be banned of use with hardtime
 
-Defaults
+Defaults to
 
 	g:list_of_normal_keys = ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
 	g:list_of_visual_keys = ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
@@ -58,7 +60,7 @@ To enable the notification about HardTime being enabled set
 
     let g:hardtime_showmsg = 1
 
-The default is `1`.
+The default is `0`.
 
 ##### Ignore Buffers
 To enable hardtime to ignore certain buffer patterns set

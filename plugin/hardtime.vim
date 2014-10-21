@@ -18,16 +18,16 @@ call s:check_defined("g:list_of_visual_keys", ["h", "j", "k", "l", "-", "+", "<U
 call s:check_defined("g:list_of_normal_keys", ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"])
 call s:check_defined("g:list_of_insert_keys", ["<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"])
 
-call s:check_defined("g:hardtime", 1)
+call s:check_defined("g:hardtime_default_on", 0)
 call s:check_defined("g:hardtime_ignore_buffer_patterns", [])
 call s:check_defined("g:hardtime_ignore_quickfix", 0)
 call s:check_defined("g:hardtime_timeout", 1000)
-call s:check_defined("g:hardtime_showmsg", 1)
+call s:check_defined("g:hardtime_showmsg", 0)
 call s:check_defined("g:hardtime_allow_different_key", 0)
 call s:check_defined("g:hardtime_maxcount", 1)
 
 " Start hardtime in every buffer
-if g:hardtime
+if g:hardtime_default_on
 	autocmd BufRead,BufNewFile * call s:HardTime()
 endif
 
@@ -135,5 +135,6 @@ fun! GetNow()
     return reltimestr(reltime())
 endf
 
-
+command! HardTimeOn call HardTimeOn()
+command! HardTimeOff call HardTimeOff()
 command! HardTimeToggle call HardTimeToggle()
