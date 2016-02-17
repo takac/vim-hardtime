@@ -17,6 +17,7 @@ endf
 call s:check_defined("g:list_of_visual_keys", ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"])
 call s:check_defined("g:list_of_normal_keys", ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"])
 call s:check_defined("g:list_of_insert_keys", ["<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"])
+call s:check_defined("g:list_of_disabled_keys", [])
 
 call s:check_defined("g:hardtime_default_on", 0)
 call s:check_defined("g:hardtime_ignore_buffer_patterns", [])
@@ -57,6 +58,11 @@ fun! HardTimeOn()
         for i in g:list_of_insert_keys
             exec "inoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? '" . (maparg(i, "i") != "" ? maparg(i, "i") : i) . "' : TooSoon()"
         endfor
+        for i in g:list_of_disabled_keys
+            exec "nnoremap <buffer> <silent> " . i . " <nop>"
+            exec "xnoremap <buffer> <silent> " . i . " <nop>"
+            exec "inoremap <buffer> <silent> " . i . " <nop>"
+        endfor
     endif
 endf
 
@@ -69,6 +75,11 @@ fun! HardTimeOff()
         exec "silent! vunmap <buffer> " . i
     endfor
     for i in g:list_of_insert_keys
+        exec "silent! iunmap <buffer> " . i
+    endfor
+    for i in g:list_of_disabled_keys
+        exec "silent! nunmap <buffer> " . i
+        exec "silent! xunmap <buffer> " . i
         exec "silent! iunmap <buffer> " . i
     endfor
 endf

@@ -5,7 +5,8 @@ down the page using `jjjjj` and `kkkkk` but without compromising the rest of our
 experience.
 
 It works using a timeout on the keys you want to stop repeating, i.e. `h`, `j`, `k`, `l`, `UP`, `DOWN`, `LEFT`, `RIGHT`.
-This timeout is set to 1000 milliseconds. After this time you can use a movement key again.
+This timeout is set to 1000 milliseconds. After this time you can use a movement key again. It also allows to completely disable
+keys that you never under any circumstances want to use.
 
 Stop repeating jjjjj...
 Stop repeating kkkk...
@@ -44,6 +45,9 @@ Defaults to
 	g:list_of_normal_keys = ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
 	g:list_of_visual_keys = ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
 	g:list_of_insert_keys = ["<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+	g:list_of_disabled_keys = []
+
+Note that the keys added to `g:list_of_disabled_keys` are disabled in all of normal, visual and insert modes.
 
 ##### Timeout
 It is possible to tweak the timeout allowed between keypresses. specifying
