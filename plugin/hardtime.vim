@@ -86,7 +86,7 @@ endf
 
 
 fun! HardTimeToggle()
-	call s:check_defined("g:hardtime_on", 0)
+	call s:check_defined("b:hardtime_on", 0)
     if b:hardtime_on
         call HardTimeOff()
 		if g:hardtime_showmsg
