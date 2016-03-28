@@ -24,6 +24,7 @@ call s:check_defined("g:hardtime_ignore_buffer_patterns", [])
 call s:check_defined("g:hardtime_ignore_quickfix", 0)
 call s:check_defined("g:hardtime_timeout", 1000)
 call s:check_defined("g:hardtime_showmsg", 0)
+call s:check_defined("g:hardtime_showerr", 0)
 call s:check_defined("g:hardtime_allow_different_key", 0)
 call s:check_defined("g:hardtime_maxcount", 1)
 
@@ -138,6 +139,9 @@ endf
 fun! TooSoon()
     if g:hardtime_showmsg
         echomsg "Hard time is enabled"
+    endif
+    if g:hardtime_showerr
+        echoerr "Hard time is enabled"
     endif
     return ""
 endf
