@@ -108,3 +108,21 @@ Add `Bundle 'takac/vim-hardtime'` to your `~/.vimrc` and then:
 * either within Vim: `:BundleInstall`
 * or in your shell: `vim +BundleInstall +qall`
 
+### Installing using vim-plug
+
+1. Install vim-plug using the [instructions][vim-plug]
+2. Add vim-hardtime to your plugin list in `.vimrc` or `plugins.vim` and re-source it:
+
+    insert vim-hardtime
+    ```
+    " Vim HardTime
+    Plug 'takac/vim-hardtime'
+    ```
+    between
+    `call plug#begin('~/.vim/plugged')`
+
+    and
+    `call plug#end()`
+3. Run `:PlugInstall`
+
+[vim-plug]:https://github.com/junegunn/vim-plug
