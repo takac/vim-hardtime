@@ -42,10 +42,10 @@ Set the list of keys to be banned of use with hardtime
 
 Defaults to
 
-	g:list_of_normal_keys = ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-	g:list_of_visual_keys = ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-	g:list_of_insert_keys = ["<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-	g:list_of_disabled_keys = []
+	let g:list_of_normal_keys = ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+	let g:list_of_visual_keys = ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+	let g:list_of_insert_keys = ["<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+	let g:list_of_disabled_keys = []
 
 Note that the keys added to `g:list_of_disabled_keys` are disabled in all of normal, visual and insert modes.
 
@@ -53,7 +53,7 @@ Note that the keys added to `g:list_of_disabled_keys` are disabled in all of nor
 It is possible to tweak the timeout allowed between keypresses. specifying
 the time in milliseconds.
 
-    g:hardtime_timeout = 2000
+    let g:hardtime_timeout = 2000
 
 This allows you increase the amount of time
 
