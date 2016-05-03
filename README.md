@@ -32,8 +32,11 @@ Once installed you can call the command `:HardTimeOn` to activate hardtime,
 conversely you can use `:HardTimeOff` to swtich it off. You can also use
 `:HardTimeToggle` toggle it on an off.
 
-If you want hardtime to run in every buffer you can set `let
-g:hardtime_default_on = 1` in your `.vimrc`.
+If you want hardtime to run in every buffer, add this to `.vimrc`
+
+	let g:hardtime_default_on = 1
+
+The default is `0`.
 
 ### Customization
 Add the following variables to your `.vimrc` to enable customizations.
