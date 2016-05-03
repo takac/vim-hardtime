@@ -32,8 +32,11 @@ Once installed you can call the command `:HardTimeOn` to activate hardtime,
 conversely you can use `:HardTimeOff` to swtich it off. You can also use
 `:HardTimeToggle` toggle it on an off.
 
-If you want hardtime to run in every buffer you can set `let
-g:hardtime_default_on = 1` in your `.vimrc`.
+If you want hardtime to run in every buffer, add this to `.vimrc`
+
+	let g:hardtime_default_on = 1
+
+The default is `0`.
 
 ### Customization
 Add the following variables to your `.vimrc` to enable customizations.
@@ -42,10 +45,10 @@ Set the list of keys to be banned of use with hardtime
 
 Defaults to
 
-	g:list_of_normal_keys = ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-	g:list_of_visual_keys = ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-	g:list_of_insert_keys = ["<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-	g:list_of_disabled_keys = []
+	let g:list_of_normal_keys = ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+	let g:list_of_visual_keys = ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+	let g:list_of_insert_keys = ["<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+	let g:list_of_disabled_keys = []
 
 Note that the keys added to `g:list_of_disabled_keys` are disabled in all of normal, visual and insert modes.
 
@@ -53,7 +56,7 @@ Note that the keys added to `g:list_of_disabled_keys` are disabled in all of nor
 It is possible to tweak the timeout allowed between keypresses. specifying
 the time in milliseconds.
 
-    g:hardtime_timeout = 2000
+    let g:hardtime_timeout = 2000
 
 This allows you increase the amount of time
 
