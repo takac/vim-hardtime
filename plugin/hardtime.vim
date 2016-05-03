@@ -138,10 +138,10 @@ endf
 
 fun! TooSoon()
     if g:hardtime_showmsg
-        echomsg "Hard time is enabled"
+        echomsg "Hard time is enabled. See :h word-motions and :h motion"
     endif
     if g:hardtime_showerr
-        echoerr "Hard time is enabled"
+        echoerr "Hard time is enabled. See :h word-motions and :h motion"
     endif
     return ""
 endf
