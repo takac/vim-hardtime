@@ -73,7 +73,7 @@ fun! HardTimeOff()
         exec "silent! nunmap <buffer> " . i
     endfor
     for i in g:list_of_visual_keys
-        exec "silent! vunmap <buffer> " . i
+        exec "silent! xunmap <buffer> " . i
     endfor
     for i in g:list_of_insert_keys
         exec "silent! iunmap <buffer> " . i
