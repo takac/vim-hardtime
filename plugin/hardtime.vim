@@ -54,7 +54,7 @@ fun! HardTimeOn()
             exec "nnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? '" . (maparg(i, "n") != "" ? maparg(i, "n") : i) . "' : TooSoon()"
         endfor
         for i in g:list_of_visual_keys
-            exec "xnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? '" . (maparg(i, "v") != "" ? maparg(i, "v") : i) . "' : TooSoon()"
+            exec "xnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? '" . (maparg(i, "x") != "" ? maparg(i, "x") : i) . "' : TooSoon()"
         endfor
         for i in g:list_of_insert_keys
             exec "inoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? '" . (maparg(i, "i") != "" ? maparg(i, "i") : i) . "' : TooSoon()"
@@ -73,7 +73,7 @@ fun! HardTimeOff()
         exec "silent! nunmap <buffer> " . i
     endfor
     for i in g:list_of_visual_keys
-        exec "silent! vunmap <buffer> " . i
+        exec "silent! xunmap <buffer> " . i
     endfor
     for i in g:list_of_insert_keys
         exec "silent! iunmap <buffer> " . i
