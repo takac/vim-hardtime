@@ -45,19 +45,27 @@ fun! s:HardTime()
     endif
 endf
 
+fun! s:Quote(str)
+  if match(a:str, "'") > -1
+    return a:str
+  else
+    return ("'" . a:str . "'")
+  endif
+endf
+
 fun! HardTimeOn()
 	call s:check_defined("b:hardtime_on", 0)
     " Prevents from mapping keys recursively
     if b:hardtime_on == 0
         let b:hardtime_on = 1
         for i in g:list_of_normal_keys
-            exec "nnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? '" . (maparg(i, "n") != "" ? maparg(i, "n") : i) . "' : TooSoon()"
+            exec "nnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? " . s:Quote(maparg(i, "n") != "" ? maparg(i, "n") : i) . " : TooSoon()"
         endfor
         for i in g:list_of_visual_keys
-            exec "xnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? '" . (maparg(i, "x") != "" ? maparg(i, "x") : i) . "' : TooSoon()"
+            exec "xnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? " . s:Quote(maparg(i, "x") != "" ? maparg(i, "x") : i) . " : TooSoon()"
         endfor
         for i in g:list_of_insert_keys
-            exec "inoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? '" . (maparg(i, "i") != "" ? maparg(i, "i") : i) . "' : TooSoon()"
+            exec "inoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? " . s:Quote(maparg(i, "i") != "" ? maparg(i, "i") : i) . " : TooSoon()"
         endfor
         for i in g:list_of_disabled_keys
             exec "nnoremap <buffer> <silent> " . i . " <nop>"
