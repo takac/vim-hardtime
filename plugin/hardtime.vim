@@ -45,19 +45,31 @@ fun! s:HardTime()
     endif
 endf
 
+fun! s:RetrieveMapping(key, mode)
+    let mapping = maparg(a:key, a:mode, 0, 1)
+    if !has_key(mapping, "rhs") || mapping["rhs"] == ""
+        return "'" . a:key . "'"
+    endif
+    " If mapping is an expression, don't quote
+    if mapping["expr"]
+        return mapping["rhs"]
+    endif
+    return "'" . mapping["rhs"] . "'"
+endf
+
 fun! HardTimeOn()
 	call s:check_defined("b:hardtime_on", 0)
     " Prevents from mapping keys recursively
     if b:hardtime_on == 0
         let b:hardtime_on = 1
         for i in g:list_of_normal_keys
-            exec "nnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? '" . (maparg(i, "n") != "" ? maparg(i, "n") : i) . "' : TooSoon()"
+            exec "nnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? " . s:RetrieveMapping(i, "n")  . " : TooSoon()"
         endfor
         for i in g:list_of_visual_keys
-            exec "xnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? '" . (maparg(i, "x") != "" ? maparg(i, "x") : i) . "' : TooSoon()"
+            exec "xnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? " . s:RetrieveMapping(i, "x") . " : TooSoon()"
         endfor
         for i in g:list_of_insert_keys
-            exec "inoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? '" . (maparg(i, "i") != "" ? maparg(i, "i") : i) . "' : TooSoon()"
+            exec "inoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? " . s:RetrieveMapping(i, "i") . " : TooSoon()"
         endfor
         for i in g:list_of_disabled_keys
             exec "nnoremap <buffer> <silent> " . i . " <nop>"
