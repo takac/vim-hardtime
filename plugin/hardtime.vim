@@ -63,13 +63,16 @@ fun! HardTimeOn()
     if b:hardtime_on == 0
         let b:hardtime_on = 1
         for i in g:list_of_normal_keys
-            exec "nnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? " . s:RetrieveMapping(i, "n")  . " : TooSoon()"
+            let ii = substitute(i, "<", "<lt>", "")
+            exec "nnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? " . s:RetrieveMapping(i, "n") . " : TooSoon('" . ii . "','n')"
         endfor
         for i in g:list_of_visual_keys
-            exec "xnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? " . s:RetrieveMapping(i, "x") . " : TooSoon()"
+            let ii = substitute(i, "<", "<lt>", "")
+            exec "xnoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? " . s:RetrieveMapping(i, "x") . " : TooSoon('" . ii . "','x')"
         endfor
         for i in g:list_of_insert_keys
-            exec "inoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? " . s:RetrieveMapping(i, "i") . " : TooSoon()"
+            let ii = substitute(i, "<", "<lt>", "")
+            exec "inoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? " . s:RetrieveMapping(i, "i") . " : TooSoon('" . ii . "','i')"
         endfor
         for i in g:list_of_disabled_keys
             exec "nnoremap <buffer> <silent> " . i . " <nop>"
@@ -148,12 +151,12 @@ fun! s:IsIgnoreQuickfix()
     return 0
 endf
 
-fun! TooSoon()
+fun! TooSoon(key, mode)
     if g:hardtime_showmsg
-        echomsg "Hard time is enabled"
+        echomsg "Hard time is enabled for " . a:key . " in " . a:mode
     endif
     if g:hardtime_showerr
-        echoerr "Hard time is enabled"
+        echoerr "Hard time is enabled for " . a:key . " in " . a:mode
     endif
     return ""
 endf
