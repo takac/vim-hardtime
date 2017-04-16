@@ -18,6 +18,7 @@ call s:check_defined("g:list_of_visual_keys", ["h", "j", "k", "l", "-", "+", "<U
 call s:check_defined("g:list_of_normal_keys", ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"])
 call s:check_defined("g:list_of_insert_keys", ["<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"])
 call s:check_defined("g:list_of_disabled_keys", [])
+call s:check_defined("g:list_of_resetting_keys", ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
 
 call s:check_defined("g:hardtime_default_on", 0)
 call s:check_defined("g:hardtime_ignore_buffer_patterns", [])
@@ -26,6 +27,7 @@ call s:check_defined("g:hardtime_timeout", 1000)
 call s:check_defined("g:hardtime_showmsg", 0)
 call s:check_defined("g:hardtime_showerr", 0)
 call s:check_defined("g:hardtime_allow_different_key", 0)
+call s:check_defined("g:hardtime_motion_with_count_resets", 0)
 call s:check_defined("g:hardtime_maxcount", 1)
 
 " Start hardtime in every buffer
@@ -79,6 +81,12 @@ fun! HardTimeOn()
             exec "xnoremap <buffer> <silent> <expr> " . i . " pumvisible()?'" . i . "':''"
             exec "inoremap <buffer> <silent> <expr> " . i . " pumvisible()?'" . i . "':''"
         endfor
+        if g:hardtime_motion_with_count_resets
+            for i in g:list_of_resetting_keys
+                exec "nnoremap <buffer> <silent> <expr> " . i . " HardTimeReset(" . i . ")"
+                exec "vnoremap <buffer> <silent> <expr> " . i . " HardTimeReset(" . i . ")"
+            endfor
+        endif
     endif
 endf
 
@@ -98,6 +106,10 @@ fun! HardTimeOff()
         exec "silent! xunmap <buffer> " . i
         exec "silent! iunmap <buffer> " . i
     endfor
+    for i in g:list_of_resetting_keys
+        exec "silent! nunmap <buffer> " . i
+        exec "silent! xunmap <buffer> " . i
+    endfor
 endf
 
 
@@ -115,7 +127,6 @@ fun! HardTimeToggle()
         end
     endif
 endf
-
 
 fun! TryKey(key)
     if pumvisible()
@@ -135,6 +146,13 @@ fun! TryKey(key)
     else
         return 0
     endif
+endf
+
+fun! HardTimeReset(key)
+    let s:lasttime = GetNow()
+    let s:lastkey = ''
+    let s:lastcount = 0
+    return a:key
 endf
 
 fun! s:IsIgnoreBuffer()

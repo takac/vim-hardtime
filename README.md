@@ -92,7 +92,7 @@ This, for example, makes it possible to input "jh", but not "jj".
 
 The default is `0`.
 
-##### Maximum number of repetative key preses
+##### Maximum number of repetitive key preses
 This setting will let you press a key `n` number of times before
 hardtime starts ignoring subsequent keypresses.
 
@@ -101,6 +101,15 @@ hardtime starts ignoring subsequent keypresses.
 Setting this value to `2` will allow a user to press `jj` but not `jjj`.
 
 The default is `1`.
+
+##### Reset counter if motion is used with a count
+Using a key with a count (`5j`) will lead to a reset of the key's count.
+
+    let g:hardtime_motion_with_count_resets = 1
+
+Setting this to `1` allows you to press `j5j` if `g:hardtime_maxcount` is `1`.
+
+The default is `0`.
 
 
 ### Installation
