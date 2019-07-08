@@ -118,6 +118,9 @@ endf
 
 
 fun! TryKey(key)
+    if pumvisible()
+        return 1
+    endif
     let now = GetNow()
     if (now > s:lasttime + g:hardtime_timeout/1000) || (g:hardtime_allow_different_key && a:key != s:lastkey) ||
     \ (s:lastcount < g:hardtime_maxcount)
