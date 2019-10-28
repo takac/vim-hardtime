@@ -50,6 +50,9 @@ fun! s:RetrieveMapping(key, mode)
     if !has_key(mapping, "rhs") || mapping["rhs"] == ""
         return "'" . a:key . "'"
     endif
+    if  has_key(mapping, "sid")
+        let mapping["rhs"] = substitute(mapping["rhs"], "<SID>", "<SNR>".mapping["sid"]."_", "")
+    endif
     " If mapping is an expression, don't quote
     if mapping["expr"]
         return mapping["rhs"]
