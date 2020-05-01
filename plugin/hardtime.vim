@@ -75,9 +75,9 @@ fun! HardTimeOn()
             exec "inoremap <buffer> <silent> <expr> " . i . " TryKey('" . i . "') ? " . s:RetrieveMapping(i, "i") . " : TooSoon('" . ii . "','i')"
         endfor
         for i in g:list_of_disabled_keys
-            exec "nnoremap <buffer> <silent> " . i . " <nop>"
-            exec "xnoremap <buffer> <silent> " . i . " <nop>"
-            exec "inoremap <buffer> <silent> " . i . " <nop>"
+            exec "nnoremap <buffer> <silent> <expr> " . i . " pumvisible()?'" . i . "':''"
+            exec "xnoremap <buffer> <silent> <expr> " . i . " pumvisible()?'" . i . "':''"
+            exec "inoremap <buffer> <silent> <expr> " . i . " pumvisible()?'" . i . "':''"
         endfor
     endif
 endf
@@ -118,6 +118,9 @@ endf
 
 
 fun! TryKey(key)
+    if pumvisible()
+        return 1
+    endif
     let now = GetNow()
     if (now > s:lasttime + g:hardtime_timeout/1000) || (g:hardtime_allow_different_key && a:key != s:lastkey) ||
     \ (s:lastcount < g:hardtime_maxcount)
