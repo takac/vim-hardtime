@@ -29,7 +29,7 @@ over to make that edit.
 ### Usage
 
 Once installed you can call the command `:HardTimeOn` to activate hardtime,
-conversely you can use `:HardTimeOff` to swtich it off. You can also use
+conversely you can use `:HardTimeOff` to switch it off. You can also use
 `:HardTimeToggle` toggle it on an off.
 
 If you want hardtime to run in every buffer, add this to `.vimrc`
