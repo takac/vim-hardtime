@@ -72,10 +72,10 @@ OPTIONS                                                      *hardtime-options*
 <
 
     g:hardtime_ignore_buffer_patterns       *g:hardtime_ignore_buffer_patterns*
-	Ignore Buffers To enable hardtime to ignore certain buffer patterns
-	set
+        Ignore Buffers To enable hardtime to ignore certain buffer patterns
+        set
 >
-	let g:hardtime_ignore_buffer_patterns = ["CustomPatt[ae]rn", "NERD.*"]
+        let g:hardtime_ignore_buffer_patterns = ["CustomPatt[ae]rn", "NERD.*"]
 <
         The default is: `[]`.
 
@@ -96,9 +96,9 @@ OPTIONS                                                      *hardtime-options*
 <
 
     g:hardtime_maxcount                                   *g:hardtime_maxcount*
-	Maximum number of repetative key preses This setting will let you
-	press a key `n` number of times before hardtime starts ignoring
-	subsequent keypresses.
+        Maximum number of repetative key preses This setting will let you
+        press a key `n` number of times before hardtime starts ignoring
+        subsequent keypresses.
         Default is:
 >
         let g:hardtime_maxcount = 1
