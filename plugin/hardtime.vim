@@ -32,7 +32,7 @@ call s:check_defined("g:hardtime_maxcount", 1)
 
 " Start hardtime in every buffer
 if g:hardtime_default_on
-	autocmd BufWinEnter * call s:HardTime()
+	autocmd BufRead,BufNewFile * call s:HardTime()
 endif
 
 let s:lasttime = 0
